@@ -11,7 +11,5 @@ npm-debug.log
 yarn-error.log
 .env
 
-vendor/
-
 routes/generated-routes.php
 database/migrations/9999*

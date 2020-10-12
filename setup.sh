@@ -41,8 +41,8 @@ if [ $environment == 'production' ]; then
         sudo apt-get update
         sudo apt-get install php7.4-mbstring zip unzip php7.4-xml php-sqlite3
 
-        echo "Installing Composer"
-        apt install composer
+        # echo "Installing Composer"
+        # apt install composer
 
         echo "Enabling modrewrite"
         # Laravel requires Apache's `mod_rewrite` for URL routing, so we enable it:
@@ -53,9 +53,10 @@ if [ $environment == 'production' ]; then
     fi
 fi
 
-dump "Composer install"
 cd "core"
-composer install --no-dev
+
+# dump "Composer install"
+# composer install --no-dev
 
 dump "Generating environment file (.env)"
 cp .env.example .env

@@ -1,7 +1,5 @@
 # e28-api
 
-Can they git clone from mine?
-
 ```bash
 $ chmod +x ./setup.sh
 ```
@@ -27,7 +25,7 @@ To set up locally, clone this project within your *htdocs/e28* directory.
 $ git clone git@github.com:susanBuck/e28-api.git
 ```
 
-Set up a local domain, *http://e28-api.loc*, that has a document root pointing to `/path/to/htdocs/e28-api/public`.
+Set up a local domain, *http://e28-api.loc*, that has a document root pointing to `/path/to/htdocs/e28-api/core/public`.
 
 Visit <http://e28-api.loc/config> to begin.
 
@@ -36,9 +34,9 @@ Visit <http://e28-api.loc/config> to begin.
 ## Configure resources
 A resource is a data entity you’ll track within your application. For example, in ZipFoods, we’d have resources like *product* and/or *order*.
 
-To configure resources for your API, update `_setup/config.json`. The `product` resource is provided as an example&mdash; remove or update.
+To configure resources for your API, duplicate and update the example `/resources/product-resource.json`.
 
-Note: Resource names must be **singular** and **one word**.
+Note: Resource names must be **singular** and **one word**
 
 Valid resource name examples:
 + `product`
@@ -75,19 +73,15 @@ Any data passed to the API for a given field that does not match the given type 
 
 
 ## Seeds
-Seed data can be set up in `_setup/seeds` in .json files. A `products.json` and `users.json` file is provided as an example.
+To configure seeds for your API, duplicate and update the example `/seeds/product-seeds.json`.
 
-Note that the seed file names must be the plural version of the corresponding resource name. For example, resource `product` has a seeds file `products.json`
+TODO: Naming conventions
 
 
 
 
 ## Setup - Production
-
 Synchronize your local and production e28 repository so that the e28-api application is available on production at `/var/www/html/e28/e28-api`
 
-Configure a production domain, http://e28-api.yourdomain.com so that its document root is `/var/www/html/e28/e28-api/public`.
+Configure a production domain, http://e28-api.yourdomain.com so that its document root is `/var/www/html/e28-api/core/public`.
 
-
-
-## Relationships
