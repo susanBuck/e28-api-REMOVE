@@ -46,16 +46,29 @@ class BuildApiCommand extends Command
         foreach ($action->results['resources'] as $resource) {
             $this->info('* ' . $resource);
         }
+        $this->info('');
 
+        
+        
         $this->info('Seeds run: ');
         foreach ($action->results['seeds'] as $seed => $data) {
-            $this->info('* ' . $seed . ' (' . count($data['success']) . ')');
+            $this->info('* ' . $seed . ' (' . count($data['added']) . ' rows added)');
 
-            if (isset($data['error'])) {
-                $this->error('Seed error:');
-                dump($data['error']);
+            if (isset($data['failed'])) {
+                $this->error('Failed rows: ');
+                dump($data['failed']);
             }
         }
+        $this->info('');
+
+
+        if (isset($action->results['errors'])) {
+            $this->info('Errors: ');
+            foreach ($action->results['errors'] as $key => $data) {
+                $this->error($data);
+            }
+        }
+
         
         return 0;
     }

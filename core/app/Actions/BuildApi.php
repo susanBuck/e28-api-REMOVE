@@ -55,17 +55,26 @@ class BuildApi
      */
     private function runSeeds()
     {
-        $results = null;
-
         $fileName = $this->resourceNameLower.'-seeds.json';
+        $filePath = base_path('../seeds/' . $fileName);
+
+        $results = [
+            'error' => [],
+            'success' => []
+        ];
+
+        $exists = File::exists($filePath);
         
-        $seeds = File::get(base_path('../seeds/' . $fileName));
-
-        $seeds = json_decode($seeds);
-
-        if (is_null($seeds)) {
-            $results[$this->resourceName] = 'Invalid seeds file: ' . $fileName;
+        if (!$exists) {
             return;
+        } else {
+            $seeds = File::get($filePath);
+            $seeds = json_decode($seeds);
+
+            if (is_null($seeds)) {
+                $this->results['errors'][] = 'Invalid seed file: ' . $filePath;
+                return;
+            }
         }
 
         if ($this->resourceName != "user") {
@@ -73,8 +82,8 @@ class BuildApi
         } else {
             $class = "App\Models\\" . $this->resourceNameStudly;
         }
-        
-        foreach ($seeds->{$this->resourceNameLowerPlural} as $data) {
+
+        foreach ($seeds->seeds as $data) {
             $resource = new $class;
 
             foreach ($data as $key => $value) {
@@ -91,11 +100,11 @@ class BuildApi
                 $resource->save();
             } catch (\Illuminate\Database\QueryException $e) {
                 $error = 'Caught exception: '.  $e->getMessage(). "\n";
-                $results['error'][] = $error;
+                $results['failed'][] = $error;
             }
 
             if (!$error) {
-                $results['success'][] = $resource->toArray();
+                $results['added'][] = $resource->toArray();
             }
         }
         
