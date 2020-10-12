@@ -22,7 +22,7 @@ class LoadResources
      */
     public function __construct()
     {
-        $resourceFiles = File::allFiles(base_path('_setup/resources/'));
+        $resourceFiles = File::allFiles(base_path('../resources/'));
 
         $this->resources =  new \stdClass();
 

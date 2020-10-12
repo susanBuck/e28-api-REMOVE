@@ -59,7 +59,7 @@ class BuildApi
 
         $fileName = $this->resourceNameLower.'-seeds.json';
         
-        $seeds = File::get(base_path('_setup/seeds/' . $fileName));
+        $seeds = File::get(base_path('../seeds/' . $fileName));
 
         $seeds = json_decode($seeds);
 

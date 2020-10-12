@@ -54,6 +54,7 @@ if [ $environment == 'production' ]; then
 fi
 
 dump "Composer install"
+cd "core"
 composer install --no-dev
 
 dump "Generating environment file (.env)"
