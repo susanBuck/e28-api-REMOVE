@@ -66,12 +66,12 @@ php artisan key:generate
 
 if [ $environment == 'production' ]; then
     dump "Setting permissions"
-    chown -R www-data /var/www/html/e28-api/storage
-    chown -R www-data /var/www/html/e28-api/bootstrap/cache
-    chown -R www-data /var/www/html/e28-api/database/migrations/
-    chown -R www-data /var/www/html/e28-api/app/Models/GeneratedModels/
-    chown -R www-data /var/www/html/e28-api/app/Http/Controllers/GeneratedControllers/
-    chown -R www-data /var/www/html/e28-api/routes
+    chown -R www-data /var/www/html/e28-api/core/storage
+    chown -R www-data /var/www/html/e28-api/core/bootstrap/cache
+    chown -R www-data /var/www/html/e28-api/core/database/migrations/
+    chown -R www-data /var/www/html/e28-api/core/app/Models/GeneratedModels/
+    chown -R www-data /var/www/html/e28-api/core/app/Http/Controllers/GeneratedControllers/
+    chown -R www-data /var/www/html/e28-api/core/routes
 fi
 
 dump "Setting up database"
@@ -79,7 +79,7 @@ touch database/database.sqlite
 if [ $environment == 'production' ]; then
     # the PDO SQLite driver requires that if you are going to do a write operation (INSERT, UPDATE, DELETE, DROP, etc.),
     # then the folder the database resides in must have write permissions, as well as the actual database file
-    chown -R www-data /var/www/html/e28-api/database
+    chown -R www-data /var/www/html/e28-api/core/database
 fi
 php artisan migrate:fresh --force
 
